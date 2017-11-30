@@ -1,7 +1,6 @@
 package com.wxp.Android_1122Pm_Kotlin_movie.adapter
 
 import android.content.Context
-import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import com.wxp.Android_1122Pm_Kotlin_movie.R
-import com.wxp.Android_1122Pm_Kotlin_movie.bean.ShouyeBean
-import java.util.ArrayList
+import com.wxp.Android_1122Pm_Kotlin_movie.bean.HomeBean
+import java.util.*
 
 /** 类的用途
  *  @author weixiaopeng
  *  @date 2017/11/23 15:20
  */
-class ShouyeFragmentAdapter(val context:Context,val list:ArrayList<ShouyeBean.Item>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ShouyeFragmentAdapter(val context:Context,val list:ArrayList<HomeBean.IssueListBean.ItemListBean>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int {
         return list.size
@@ -24,12 +23,12 @@ class ShouyeFragmentAdapter(val context:Context,val list:ArrayList<ShouyeBean.It
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         var viewholder:ViewHodler = holder as ViewHodler
-        viewholder.tv_title?.setText(list[position].data.title)
-        viewholder.tv_detail?.setText("发布于 "+list[position].data.category+" / "+list[position].data.duration+"s")
-        Picasso.with(context).load(list[position].data.cover.feed).into(viewholder.iv_photo)
+        viewholder.tv_title?.setText(list[position].data?.title)
+        viewholder.tv_detail?.setText("发布于 "+list[position].data?.category+" / "+list[position].data?.duration+"s")
+        Picasso.with(context).load(list[position].data?.cover?.feed).into(viewholder.iv_photo)
         viewholder.iv_photo?.scaleType = ImageView.ScaleType.FIT_XY
-        if(!"".equals(list[position].data.provider.icon)){
-            Picasso.with(context).load(list[position].data.provider.icon).into(viewholder.iv_user)
+        if(!"".equals(list[position].data?.image)){
+            Picasso.with(context).load(list[position].data?.image).into(viewholder.iv_user)
         }
 
     }

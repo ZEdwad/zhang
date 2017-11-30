@@ -1,6 +1,6 @@
 package com.wxp.Android_1122Pm_Kotlin_movie.view
 
-import com.wxp.Android_1122Pm_Kotlin_movie.bean.ShouyeBean
+import com.wxp.Android_1122Pm_Kotlin_movie.bean.HomeBean
 
 /** 类的用途
  *  @author weixiaopeng
@@ -9,7 +9,6 @@ import com.wxp.Android_1122Pm_Kotlin_movie.bean.ShouyeBean
 interface ShouyeView {
 
     // 给首页赋值
-    fun setShouyeData(s: ShouyeBean.Bean)
-    // 给首页+赋值
-    fun setShouyeNextData(s: ShouyeBean.Bean)
+    fun setShouyeData(s: HomeBean)
+
 }

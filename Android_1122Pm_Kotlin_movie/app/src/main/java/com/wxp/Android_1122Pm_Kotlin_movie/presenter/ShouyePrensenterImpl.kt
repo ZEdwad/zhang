@@ -1,9 +1,8 @@
 package com.wxp.Android_1122Pm_Kotlin_movie.presenter
 
 import android.content.Context
-import android.util.Log
 import com.wxp.Android_1122Pm_Kotlin_movie.base.BasePresenter
-import com.wxp.Android_1122Pm_Kotlin_movie.bean.ShouyeBean
+import com.wxp.Android_1122Pm_Kotlin_movie.bean.HomeBean
 import com.wxp.Android_1122Pm_Kotlin_movie.model.MvpModel
 import com.wxp.Android_1122Pm_Kotlin_movie.model.MvpModelImpl
 import com.wxp.Android_1122Pm_Kotlin_movie.view.ShouyeView
@@ -19,26 +18,26 @@ class ShouyePrensenterImpl:BasePresenter<ShouyeView>() {
     var model: MvpModel? = null
 
     // 首页数据
-    fun ConnectMGetShouye(context: Context, num:String) {
+    fun ConnectMGetShouye(context: Context) {
         model = MvpModelImpl()
-        val flowable = model?.getShouyeServerData(context,num)
+        val flowable = model?.getShouyeServerData(context,true,"0")
 
         flowable?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe { shouye: ShouyeBean.Bean ->
+                ?.subscribe { shouye: HomeBean ->
                     view?.setShouyeData(shouye)
                 }
     }
 
     // 首页+数据
-    fun ConnectMGetShouyeNext(context: Context) {
+    fun ConnectMGetShouyeNext(context: Context,path:String) {
         model = MvpModelImpl()
-        val flowable = model?.getShouyeNextServerData(context)
+        val flowable = model?.getShouyeServerData(context,false,path)
 
         flowable?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe { shouye: ShouyeBean.Bean ->
-                    view?.setShouyeNextData(shouye)
+                ?.subscribe { shouye: HomeBean ->
+                    view?.setShouyeData(shouye)
                 }
     }
 

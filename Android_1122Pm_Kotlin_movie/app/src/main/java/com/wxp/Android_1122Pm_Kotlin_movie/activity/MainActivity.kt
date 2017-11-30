@@ -40,6 +40,9 @@ class MainActivity() : BaseActivity<MainView,MvpPresenterImpl>() , MainView,View
                 main_title.text=""
                 right_up_image.setImageResource(R.drawable.icon_setting)
             }
+            R.id.right_up_image->{
+
+            }
         }
     }
 
@@ -50,6 +53,8 @@ class MainActivity() : BaseActivity<MainView,MvpPresenterImpl>() , MainView,View
     lateinit var mineFragment:MineFragment
     lateinit var transaction: FragmentTransaction
     lateinit var fragmentManager: FragmentManager
+
+
 
     override val layoutResId: Int
 

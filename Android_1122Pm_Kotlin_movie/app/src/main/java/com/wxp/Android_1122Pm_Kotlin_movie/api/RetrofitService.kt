@@ -2,8 +2,8 @@ package com.wxp.Android_1122Pm_Kotlin_movie.api
 
 import com.tt.lvruheng.eyepetizer.mvp.model.bean.HotBean
 import com.wxp.Android_1122Pm_Kotlin_movie.bean.Find
+import com.wxp.Android_1122Pm_Kotlin_movie.bean.HomeBean
 import com.wxp.Android_1122Pm_Kotlin_movie.bean.Msg
-import com.wxp.Android_1122Pm_Kotlin_movie.bean.ShouyeBean
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,7 +14,13 @@ import retrofit2.http.Query
  */
 interface RetrofitService {
 
+    //首页数据
+    @GET("v2/feed?num=2&udid=26868b32e808498db32fd51fb422d00175e179df&vc=83")
+    fun getHomeData(): Flowable<HomeBean>
 
+    //获取首页第一页之后的数据  ?date=1499043600000&num=2
+    @GET("v2/feed")
+    fun getHomeMoreData(@Query("date") date :String,@Query("num") num :String) : Flowable<HomeBean>
 
     //获取发现频道详情信息
     @GET("v3/videos")
@@ -33,13 +39,6 @@ interface RetrofitService {
     @GET("v2/categories?udid=26868b32e808498db32fd51fb422d00175e179df&vc=83")
     fun Find(): Flowable<List<Find>>
 
-    // 首页数据
-    @GET("v2/feed?num=2&udid=26868b32e808498db32fd51fb422d00175e179df")
-    fun ShouyeData(@Query("vc") num:String): Flowable<ShouyeBean.Bean>
-
-    // 首页+数据
-    @GET("v2/feed?date=1511226000000&num=2")
-    fun ShouyeNextData(): Flowable<ShouyeBean.Bean>
 
     //获取热门排行信息
     @GET("v3/ranklist")

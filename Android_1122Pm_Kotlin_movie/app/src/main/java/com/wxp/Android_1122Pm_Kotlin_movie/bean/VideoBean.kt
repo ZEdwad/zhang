@@ -11,9 +11,9 @@ import java.io.Serializable
  * @date 2017/11/24/10:27
  *
  */
-data class VideoBean(var feed:String?,var title:String?,var description:String?,
-                     var duration: Long?,var playUrl: String?,var category: String?,
-                     var blurred : String?,var collect:Int?,var share:Int?,var reply:Int?,var time:Long) : Parcelable,Serializable {
+data class VideoBean(var feed:String?, var title:String?, var description:String?,
+                     var duration: Long?, var playUrl: String?, var category: String?,
+                     var blurred: String?, var collect:Int?, var share:Int?, var reply:Int?, var time:Long) : Parcelable,Serializable {
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<VideoBean> = object : Parcelable.Creator<VideoBean> {
             override fun createFromParcel(source: Parcel): VideoBean = VideoBean(source)
@@ -25,7 +25,7 @@ data class VideoBean(var feed:String?,var title:String?,var description:String?,
     source.readString(),
     source.readString(),
     source.readString(),
-    source.readValue(Long::class.java.classLoader) as Long?,
+    source.readValue(Int::class.java.classLoader) as Long?,
     source.readString(),
     source.readString(),
     source.readString(),

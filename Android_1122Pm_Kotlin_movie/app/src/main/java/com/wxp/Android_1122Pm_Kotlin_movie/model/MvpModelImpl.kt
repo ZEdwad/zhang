@@ -6,8 +6,8 @@ import com.tt.lvruheng.eyepetizer.network.RetrofitClient
 import com.wxp.Android_1122Pm_Kotlin_movie.api.API
 import com.wxp.Android_1122Pm_Kotlin_movie.api.RetrofitService
 import com.wxp.Android_1122Pm_Kotlin_movie.bean.Find
+import com.wxp.Android_1122Pm_Kotlin_movie.bean.HomeBean
 import com.wxp.Android_1122Pm_Kotlin_movie.bean.Msg
-import com.wxp.Android_1122Pm_Kotlin_movie.bean.ShouyeBean
 import io.reactivex.Flowable
 
 /** 类的用途
@@ -15,6 +15,15 @@ import io.reactivex.Flowable
  *  @date 2017/11/21 16:05
  */
 class MvpModelImpl():MvpModel {
+
+    override fun getShouyeServerData(context: Context, isFirst: Boolean, data: String?): Flowable<HomeBean>? {
+        val flowable = RetrofitClient.getInstance(context, API.DAILY).create(RetrofitService::class.java)
+        when(isFirst) {
+            true -> return flowable?.getHomeData()
+
+            false -> return flowable?.getHomeMoreData(data.toString(), "2")
+        }
+    }
 
     //热门
     override fun getHotView(context: Context, num: Int, strategy: String?, uid: String, start: Int): Flowable<HotBean>? {
@@ -44,20 +53,11 @@ class MvpModelImpl():MvpModel {
     }
 
 
-    override fun getShouyeNextServerData(context: Context): Flowable<ShouyeBean.Bean>? {
-        val flowable = RetrofitClient.getInstance(context, API.DAILY).create(RetrofitService::class.java)?.ShouyeNextData()
-        return flowable
-    }
-
-    // 首页数据
-    override fun getShouyeServerData(context: Context, num: String): Flowable<ShouyeBean.Bean>? {
-        val flowable = RetrofitClient.getInstance(context, API.DAILY).create(RetrofitService::class.java)?.ShouyeData(num)
-        return flowable
-    }
-
     override fun getServerData(context: Context,num:String): Flowable<Msg>? {
         val flowable = RetrofitClient.getInstance(context, API.path).create(RetrofitService::class.java)?.getData(num)
         return flowable
     }
+
+
 
 }
