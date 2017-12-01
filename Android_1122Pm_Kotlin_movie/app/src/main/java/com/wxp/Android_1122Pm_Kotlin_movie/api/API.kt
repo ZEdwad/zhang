@@ -7,6 +7,8 @@ package com.wxp.Android_1122Pm_Kotlin_movie.api
 class API {
 
     companion object {
+
+        //公共接口
         val path = "http://www.yulin520.com/a2a/forum/"
 
         //每日精选
